@@ -1,0 +1,51 @@
+{% extends 'client/structure.html' %}
+{% block content %}
+{% load static %}
+<!-- Header-->
+</div>
+<!-- Page Content-->
+<section class="py-5">
+    <div class="container px-5">
+        <div class="mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Recherche d'un medicament">
+        </div>
+        <div class="row gx-5">
+            {% for i in medoc %}
+            <div class="col-lg-4 medoc-card">
+                <div class="position-relative mb-5">
+                    <div class="bg-white shadow-sm overflow-hidden rounded-3">
+                        <div class="p-4">
+                            <div class="mb-3">
+                                <h5 class="fw-bold mb-1 medoc-designation">{{i.designation}}</h5>
+                            </div>
+                            <p class="text-muted fw-light mb-0">{{i.description}}
+                                
+                            </p>
+                            <a href="/lespharmacie/{{i.encrypt_id}}" class="text-dark stretched-link">Les pharmacies</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function() {
+        const filter = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('.medoc-card');
+        cards.forEach(function(card) {
+            const designation = card.querySelector('.medoc-designation').textContent.toLowerCase();
+            if (designation.includes(filter)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

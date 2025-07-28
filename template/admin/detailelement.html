@@ -1,0 +1,444 @@
+{% extends 'admin/structure.html' %}
+{% load static %}
+{% block content %}
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+    <div class="d-flex flex-column flex-column-fluid">
+        <!-- Toolbar -->
+        <div id="kt_app_toolbar" class="app-toolbar py-4 py-lg-8" data-kt-sticky="true"
+            data-kt-sticky-name="app-toolbar-sticky" data-kt-sticky-offset="{default: 'false', lg: '300px'}">
+            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack flex-wrap">
+                <div class="page-title d-flex py-2 py-lg-0 flex-column justify-content-center me-3">
+                    <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+                        Affectation des services
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card h-auto">
+                                <div class="card-body">
+                                    <div class="profile-tab">
+                                        <div class="custom-tab-1">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item"><a href="#maladie-traitement" data-bs-toggle="tab"
+                                                        class="nav-link active show">Maladie traitement</a>
+                                                </li>
+                                                <li class="nav-item"><a href="#equipement-utilisees"
+                                                        data-bs-toggle="tab" class="nav-link">Équipements utilisés</a>
+                                                </li>
+                                                <li class="nav-item"><a href="#medecins-affectes" data-bs-toggle="tab"
+                                                        class="nav-link">Médecins affectés</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div id="maladie-traitement" class="tab-pane fade active show">
+                                                    <div id="kt_app_content" class="app-content flex-column-fluid">
+                                                        <div id="kt_app_content_container"
+                                                            class="app-container container-xxl">
+                                                            <div class="card card-flush">
+                                                                <div
+                                                                    class="card-header align-items-center py-5 gap-2 gap-md-5">
+                                                                    <div class="card-title">
+                                                                        <div
+                                                                            class="d-flex align-items-center position-relative my-1">
+                                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                                            <input type="text"
+                                                                                data-kt-ecommerce-product-filter="search"
+                                                                                class="form-control form-control-solid w-250px ps-12"
+                                                                                placeholder="Rechercher une maladie" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModalCenter">
+                                                                        Nouvelle maladie
+                                                                    </button>
+                                                                </div>
+                                                                <div class="card-body pt-0">
+                                                                    <div class="table-responsive">
+                                                                        <table
+                                                                            class="table align-middle table-row-dashed fs-6 gy-5"
+                                                                            id="maladie_table">
+                                                                            <thead>
+                                                                                <tr
+                                                                                    class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                                                                    <th class="w-10px pe-2">
+                                                                                        <div
+                                                                                            class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value="1"
+                                                                                                aria-label="Tout sélectionner" />
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th class="min-w-200px">Maladie</th>
+                                                                                    <th class="text-end min-w-100px">
+                                                                                        Description</th>
+                                                                                    <th class="text-end min-w-70px">
+                                                                                        Actions</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="fw-semibold text-gray-600">
+                                                                                {% for i in maladie %}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value="1"
+                                                                                                aria-label="Select row" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>{{ i.maladie }}</td>
+                                                                                    <td class="text-end">
+                                                                                        {{i.description }}</td>
+                                                                                    <td class="text-end">
+                                                                                        <div class="d-flex">
+                                                                                            <a href="#"
+                                                                                                class="btn btn-primary shadow btn-xs sharp me-1 edit-service-btn"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#editServiceModal"
+                                                                                                data-id="{{ i.service.id }}"
+                                                                                                data-designation="{{ i.service.designation }}"
+                                                                                                title="Modifier">
+                                                                                                <i
+                                                                                                    class="fa fa-pencil"></i>
+                                                                                            </a>
+                                                                                            <a href="#"
+                                                                                                class="btn btn-danger shadow btn-xs sharp"
+                                                                                                title="Supprimer">
+                                                                                                <i
+                                                                                                    class="fa fa-trash"></i>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="equipement-utilisees" class="tab-pane fade">
+                                                    <div id="kt_app_content" class="app-content flex-column-fluid">
+                                                        <div id="kt_app_content_container"
+                                                            class="app-container container-xxl">
+                                                            <div class="card card-flush">
+                                                                <div
+                                                                    class="card-header align-items-center py-5 gap-2 gap-md-5">
+                                                                    <div class="card-title">
+                                                                        <div
+                                                                            class="d-flex align-items-center position-relative my-1">
+                                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                                            <input type="text"
+                                                                                data-kt-ecommerce-product-filter="search"
+                                                                                class="form-control form-control-solid w-250px ps-12"
+                                                                                placeholder="Rechercher une equipement" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#equipementadd">
+                                                                        Nouvelle equipement
+                                                                    </button>
+                                                                </div>
+                                                                <div class="card-body pt-0">
+                                                                    <div class="table-responsive">
+                                                                        <table
+                                                                            class="table align-middle table-row-dashed fs-6 gy-5"
+                                                                            id="maladie_table">
+                                                                            <thead>
+                                                                                <tr
+                                                                                    class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                                                                    <th class="w-10px pe-2">
+                                                                                        <div
+                                                                                            class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value="1"
+                                                                                                aria-label="Tout sélectionner" />
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th class="min-w-200px">Equipement</th>
+                                                                                    <th class="text-end min-w-100px">
+                                                                                        Description</th>
+                                                                                    <th class="text-end min-w-70px">
+                                                                                        Actions</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="fw-semibold text-gray-600">
+                                                                                {% for i in equipement %}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value="1"
+                                                                                                aria-label="Select row" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>{{ i.designation }}</td>
+                                                                                    <td class="text-end">
+                                                                                        {{i.description }}</td>
+                                                                                    <td>
+                                                                                        <img src="" alt="">
+                                                                                    </td>
+                                                                                    <td class="text-end">
+                                                                                        <div class="d-flex">
+                                                                                            <a href="#"
+                                                                                                class="btn btn-primary shadow btn-xs sharp me-1 edit-service-btn"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#editServiceModal"
+                                                                                                data-id="{{ i.service.id }}"
+                                                                                                data-designation="{{ i.service.designation }}"
+                                                                                                title="Modifier">
+                                                                                                <i
+                                                                                                    class="fa fa-pencil"></i>
+                                                                                            </a>
+                                                                                            <a href="#"
+                                                                                                class="btn btn-danger shadow btn-xs sharp"
+                                                                                                title="Supprimer">
+                                                                                                <i
+                                                                                                    class="fa fa-trash"></i>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="medecins-affectes" class="tab-pane fade">
+                                                    <div id="kt_app_content" class="app-content flex-column-fluid">
+                                                        <div id="kt_app_content_container"
+                                                            class="app-container container-xxl">
+                                                            <div class="card card-flush">
+                                                                <div
+                                                                    class="card-header align-items-center py-5 gap-2 gap-md-5">
+                                                                    <div class="card-title">
+                                                                        <div
+                                                                            class="d-flex align-items-center position-relative my-1">
+                                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                                            <input type="text"
+                                                                                data-kt-ecommerce-product-filter="search"
+                                                                                class="form-control form-control-solid w-250px ps-12"
+                                                                                placeholder="Rechercher un medecin" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#medecinadd">
+                                                                        Nouveau medecin
+                                                                    </button>
+                                                                </div>
+                                                                <div class="card-body pt-0">
+                                                                    <div class="table-responsive">
+                                                                        <table
+                                                                            class="table align-middle table-row-dashed fs-6 gy-5"
+                                                                            id="maladie_table">
+                                                                            <thead>
+                                                                                <tr
+                                                                                    class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                                                                    <th class="w-10px pe-2">
+                                                                                        <div
+                                                                                            class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value="1"
+                                                                                                aria-label="Tout sélectionner" />
+                                                                                        </div>
+                                                                                    </th>
+                                                                                    <th class="min-w-200px">Medecin</th>
+                                                                                    <th class="text-end min-w-100px">
+                                                                                        Fonction</th>
+                                                                                    <th class="text-end min-w-70px">
+                                                                                        Actions</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="fw-semibold text-gray-600">
+                                                                                {% for i in medecin %}
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                            <input
+                                                                                                class="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value="1"
+                                                                                                aria-label="Select row" />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>{{ i.identite }}</td>
+                                                                                    <td class="text-end">
+                                                                                        {{i.numero }}</td>
+                                                                                    <td>
+                                                                                        <img src="" alt="">
+                                                                                    </td>
+                                                                                    <td class="text-end">
+                                                                                        <div class="d-flex">
+                                                                                            <a href="#"
+                                                                                                class="btn btn-primary shadow btn-xs sharp me-1 edit-service-btn"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#editServiceModal"
+                                                                                                data-id="{{ i.service.id }}"
+                                                                                                data-designation="{{ i.service.designation }}"
+                                                                                                title="Modifier">
+                                                                                                <i
+                                                                                                    class="fa fa-pencil"></i>
+                                                                                            </a>
+                                                                                            <a href="#"
+                                                                                                class="btn btn-danger shadow btn-xs sharp"
+                                                                                                title="Supprimer">
+                                                                                                <i
+                                                                                                    class="fa fa-trash"></i>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/hospital/createmaladie/{{id}}" method="post">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement de maladie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom de la maladie</label>
+                        <input type="text" class="form-control" name="maladie" placeholder="Nom de la maladie"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label>Description de la maladie</label>
+                        <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <!-- Ajoute d'autres champs si besoin -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- modal equipement -->
+<form action="/hospital/createequipement/{{id}}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal fade" id="equipementadd">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement de l'equipement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom de l'equipement</label>
+                        <input type="text" placeholder="equipement..." class="form-control" name="designation">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description" placeholder="Description de l'equipement..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Prix</label>
+                        <textarea class="form-control" name="prix" placeholder="Prix de l'equipement..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" placeholder="Image" class="form-control" name="image">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- model medecin -->
+<form action="/hospital/createmedecin/{{id}}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal fade" id="medecinadd">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement de l'equipement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom de medecin</label>
+                        <input type="text" placeholder="nom..." class="form-control" name="identite">
+                    </div>
+                    <div class="form-group">
+                        <label>Fonction de medecin</label>
+                        <input type="text" placeholder="fonction..." class="form-control" name="fonction">
+                    </div>
+                    <div class="form-group">
+                        <label>Numero ordre de medecin</label>
+                        <input type="text" placeholder="numero..." class="form-control" name="numero_ordre">
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" placeholder="Image" class="form-control" name="image">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

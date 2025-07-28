@@ -1,0 +1,112 @@
+{% extends 'admin/structure.html' %}
+{% load static %}
+{% block content %}
+<div class="content-body">
+    <div class="container-fluid">
+        <!-- row -->
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card h-auto">
+                        <div class="card-body">
+                            <div class="profile-tab">
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+
+                                        <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
+                                                class="nav-link active show">Quartier</a>
+                                        </li>
+                                        <li class="nav-item">
+                                        <a href="#" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
+                                             class="fa fa-add"></i></a>
+                                        </li>                                    
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="my-posts" class="tab-pane fade active show">
+                                            <div class="card-header">
+                                                
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="example3" class="display min-w850">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#ID</th>
+                                                            <th>Commune</th>
+                                                            <th>Quartier</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      {% for i in quartier %}
+                                                        <tr>
+                                                            <td>{{i.id}}</td>
+                                                            <td>{{i.designation}}</td>
+                                                            <td>
+                                                                {% for quartier in i.quartier_set.all %}
+                                                                <span>
+                                                                    <span>{{quartier.designation}}</span>
+                                                                    <a href="#" style="margin-bottom: 5px;" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                                        class="fa fa-pencil"></i>
+                                                                    </a>
+                                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                                        class="fa fa-trash"></i></a>
+                                                                </span><br>
+                                                                {% endfor %}
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="{% url 'administrationapp:createquartier' %}" method="post">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement du quartier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button> 
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Choisir la commune</label>
+                        <select name="commune" id="" class="form-control default-select">
+                            {% for i in commune %}
+                            <option value="{{i.id}}">{{i.designation}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nom du quartier</label>
+                        <input type="text" placeholder="Entrer le nom du quartier"
+                            class="form-control" name="designation">
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- modal equipement -->
+
+{% endblock %}

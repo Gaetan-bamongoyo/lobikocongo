@@ -1,0 +1,276 @@
+{% extends 'admin/structure.html' %}
+{% load static %}
+{% block content %}
+<div class="content-body">
+    <div class="container-fluid">
+        <!-- row -->
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card h-auto">
+                        <div class="card-body">
+                            <div class="profile-tab">
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
+                                                class="nav-link active show">Hopital</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab"
+                                                class="nav-link">Equipement utilisees</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
+                                                class="nav-link">Medecins affectes</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="my-posts" class="tab-pane fade active show">
+                                            <div class="card-header">
+                                                
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="example3" class="display min-w850">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#ID</th>
+                                                            <th>Designation</th>
+                                                            <th>Adresse</th>
+                                                            <th>Telephone</th>
+                                                            <th>Image</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for i in hopital %}
+                                                        <tr>
+                                                            <td>
+                                                                <img src="{{i.photo.url}}" alt="" srcset="" width="45" height="45" style="border-radius: 50%; object-fit: cover;">
+                                                            </td>
+                                                            <td>{{i.designation}}</td>
+                                                            <td>{{i.adresse}}</td>
+                                                            
+                                                            <td>{{i.phone}}</td>
+                                                            <td>
+                                                                <a href="javascript:void(0);"><strong>{{i.user.email}}</strong></a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div id="about-me" class="tab-pane fade">
+                                            <div class="card-header">
+                                                
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="example3" class="display min-w850">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Nom equipement</th>
+                                                            <th>Description</th>
+                                                            <th>Service utilisé</th>
+                                                            <th>Hopital</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for i in equipements %}
+                                                        <tr>
+                                                            <td>
+                                                                {% if i.image %}
+                                                                    <img class="rounded-circle" width="35" height="35"
+                                                                    src="{{i.image.url}}" alt="">
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>{{i.designation}}</td>
+                                                            <td>{{i.description}}</td>
+                                                            <td>
+                                                                <a href="javascript:void(0);"><strong>{{i.user.email}}</strong></a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0);"><strong>{{i.choix.hopital.designation}}</strong></a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div id="profile-settings" class="tab-pane fade">
+                                            <div class="card-header">
+                                                
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="example3" class="display min-w850">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Noms medecin</th>
+                                                            <th>Fonction</th>
+                                                            <th>Service affectés</th>
+                                                            <th>Hopital </th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for i in doc %}
+                                                        <tr>
+                                                            <td>
+                                                                {% if i.image %}
+                                                                    <img class="rounded-circle" width="35" height="35"
+                                                                    src="{{i.image.url}}" alt="">
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>{{i.identite}}</td>
+                                                            <td>{{i.fonction}}</td>
+                                                            <td>
+                                                                <a href="javascript:void(0);"><strong>{{i.user.email}}</strong></a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0);"><strong>{{i.choix.hopital.designation}}</strong></a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/hospital/createmaladie/{{id}}" method="post">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement de maladie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button> 
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom de la maladie</label>
+                        <input type="text" placeholder="1234 Main St"
+                            class="form-control" name="maladie">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description" placeholder="Type your message..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- modal equipement -->
+<form action="/hospital/createequipement/{{id}}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal fade" id="equipementadd">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement de l'equipement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button> 
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom de l'equipement</label>
+                        <input type="text" placeholder="equipement..."
+                            class="form-control" name="designation">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description" placeholder="Type your message..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" placeholder="Image"
+                            class="form-control" name="image">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- model medecin -->
+<form action="/hospital/createmedecin/{{id}}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal fade" id="medecinadd">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Enregistrement de l'equipement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button> 
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom de medecin</label>
+                        <input type="text" placeholder="equipement..."
+                            class="form-control" name="identite">
+                    </div>
+                    <div class="form-group">
+                        <label>Fonction de medecin</label>
+                        <input type="text" placeholder="equipement..."
+                            class="form-control" name="fonction">
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" placeholder="Image"
+                            class="form-control" name="image">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

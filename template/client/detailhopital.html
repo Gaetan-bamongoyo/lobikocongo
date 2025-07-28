@@ -1,0 +1,120 @@
+{% extends 'client/structure.html' %}
+{% block content %}
+{% load static %}
+</div>
+<!-- Page Content-->
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <div class="col-lg-4">
+                <div class="sidebar-fixed">
+                    <div class="position-relative mb-5">
+                        <div class="bg-primary shadow-sm overflow-hidden rounded-3 mb-3">
+                            <img class="card-img-top" src="{{hopital.photo.url}}" alt="...">
+                            <div class="p-4">
+                                <div>
+                                    <h5 class="fw-bold text-white mb-1">{{hopital.designation}}</h5>
+                                    <p class="mb-0 text-white-50">{{hopital.ville.designation}}</p>
+                                </div>
+                            </div>
+                            <div class="p-4 border-top border-50">
+                                <div class="d-flex gap-3 pb-1 text-white">
+                                    <i class="bi bi-telephone m-0"></i>
+                                    <div>
+                                        <p class="mb-1 text-white">(+243) {{hopital.phone}}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3 pb-1 text-white">
+                                    <i class="bi bi-envelope m-0"></i>
+                                    <div>
+                                        <p class="mb-1 text-white">{{hopital.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3 pb-0 text-white">
+                                    <i class="bi bi-geo-alt m-0"></i>
+                                    <div>
+                                        <p class="mb-1 text-white">{{hopital.adresse}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <h2 class="mb-1 fw-bold text-primary">{{hopital.designation}}</h2>
+                <p>{{hopital.description}}
+                </p>
+                <h3 class="mb-3 h5">Les docteurs</h3>
+                <div class="table-responsive bg-white rounded-3 shadow-sm p-3">
+                    <table class="table table-borderless m-0">
+                        <thead>
+                            <tr>
+                                <th class="col-3">Nom</th>
+                                <th class="col-3">Numero</th>
+                                <th>Fonction</th>
+                                <th>Service affecte</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in hopital.choixservice.all %}
+                            {% for i in service.docteur.all %}
+                            <tr>
+                                <td class="text-muted">{{i.identite}}</td>
+                                <td class="text-muted">{{i.numero}}</td>
+                                <td class="text-muted">{{i.fonction}}</td>
+                                <td class="text-muted">{{i.choix.service.designation}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="mb-3 mt-4 h5">Les services</h3>
+                <div class="table-responsive bg-white rounded-3 shadow-sm p-3">
+                    <table class="table table-borderless m-0">
+                        <thead>
+                            <tr>
+                                <th class="col-3">Service</th>
+                                <th class="col-3">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in hopital.choixservice.all %}
+                            <tr>
+                                <td class="text-muted">{{service.service.designation}}</td>
+                                <td class="text-muted">{{service.service.description}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="mb-3 mt-4 h5">Les machines medicales</h3>
+                <div class="table-responsive bg-white rounded-3 shadow-sm p-3">
+                    <table class="table table-borderless m-0">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th class="col-3">Nom equipement</th>
+                                <th class="col-3">Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in hopital.choixservice.all %}
+                                {% for equipement in service.equipement.all %}
+                                    <tr>
+                                        <td><img src="{{hopital.photo.url}}" width="50" alt="" srcset=""></td>
+                                        <td class="text-muted">{{ equipement.designation }}</td>
+                                        <td class="text-muted">{{equipement.prix}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+{% endblock %}

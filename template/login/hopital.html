@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestSearch</title>
+    <link rel="stylesheet" href="{% static 'login/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'login/cropper-1280x720.jpg' %}" alt="Doctor with Stethoscope">
+        </div> 
+        
+            <div class="form-container">
+                <form action="{% url 'administrationapp:createhospital' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <div class="form" id="hospital-form">
+                            <h2>Les informations de votre hopital</h2>
+                            <input type="hidden" name="id" value="{{user}}">
+                            <input type="text" name="designation" placeholder="Nom de l'hopital" required>
+                            <select name="ville" id="">
+                                {% for i in ville %}
+                                <option value="{{i.id}}">{{i.designation}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="number" name="consultation" placeholder="Prix de la consultation" required>
+                            <input type="text" name="adresse" placeholder="ex : Commune, Quartier, Avenue, Numero parcelle" required>
+                            <input type="text" name="enregistrement" placeholder="ex : KJDI37262" required>
+                            <input type="number" name="numero" placeholder="Numero de telephone" required>
+                            <input type="file" name="image" accept="image/*" name="image" required>
+                            <button type="submit">Enregistrement</button>
+            
+                        </div>
+                </form>
+            </div>
+    </div>
+
+    <script src="{% static 'login/scripts.js' %}"></script>
+</body>
+</html>

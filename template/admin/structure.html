@@ -1,0 +1,300 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <title>{% block title %}Administration{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="description"
+        content="The most advanced Bootstrap Admin Theme on Bootstrap Market trusted by over 4,000 beginners and professionals. Multi-demo, Dark Mode, RTL support. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords"
+        content="keen, bootstrap, bootstrap 5, bootstrap 4, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Keen - Multi-demo Bootstrap 5 HTML Admin Dashboard Template by KeenThemes" />
+    <meta property="og:url" content="https://keenthemes.com/keen" />
+    <meta property="og:site_name" content="Keen by Keenthemes" />
+    <link rel="canonical" href="products.html" />
+    <link rel="shortcut icon" href="{% static 'client/clients/assets/media/logos/favicon.ico' %}" />
+
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" /> <!--end::Fonts-->
+
+    <!--begin::Vendor Stylesheets(used for this page only)-->
+    <link href="{% static 'client/clients/assets/plugins/custom/datatables/datatables.bundle.css' %}" rel="stylesheet"
+        type="text/css" />
+    <!--end::Vendor Stylesheets-->
+
+
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="{% static 'client/clients/assets/plugins/global/plugins.bundle.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'client/clients/assets/css/style.bundle.css' %}" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+
+    <!--begin::Google tag-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37564768-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-37564768-1');
+    </script>
+    <!--end::Google tag-->
+    <script>
+        // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+        if (window.top != window.self) {
+            window.top.location.replace(window.self.location.href);
+        }
+    </script>
+
+    <style>
+        .inputs{
+            display: none;
+        }
+        .inputs.show{
+            display: block;
+        }
+        .btn{
+            background-color: blue;
+            padding: auto;
+        }
+        .select-div.hide{
+            display: none;
+        }
+    </style>
+
+    <script>
+        function openInput(){
+            const inputs = document.getElementById('inputs');
+            const selectDiv = document.getElementById('selectDIv');
+            const showInput = inputs.classList.toggle('show');
+            if(showInput){
+                selectDiv.classList.add('hide');
+            }else{
+                selectDiv.classList.remove('hide');
+            }
+        }
+    </script>
+    {% block extra_css %}{% endblock %}
+</head>
+<!--end::Head-->
+
+<!--begin::Body-->
+
+<body id="kt_app_body" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true"
+    data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
+    data-kt-app-sidebar-push-footer="true" data-kt-app-sidebar-stacked="true"
+    data-kt-app-sidebar-secondary-enabled="true" data-kt-app-toolbar-enabled="true" class="app-default">
+
+
+
+    <!--begin::App-->
+    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+        <!--begin::Page-->
+        <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
+
+
+            <!--begin::Header-->
+            <div id="kt_app_header" class="app-header  d-flex d-lg-none " data-kt-sticky="true"
+                data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky"
+                data-kt-sticky-offset="{default: false, lg: '300px'}">
+
+                <!--begin::Header container-->
+                <div class="app-container  container-xxl d-flex align-items-center justify-content-between "
+                    id="kt_app_header_container">
+                    <!--begin::Logo-->
+                    <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
+                        <a href="../../../index.html">
+                            <img alt="Logo"
+                                src="{% static 'client/clients/assets/media/logos/default-small-dark.svg' %}"
+                                class="h-30px" />
+                        </a>
+                    </div>
+                    <!--end::Logo-->
+
+                    <!--begin::Header mobile toggle-->
+                    <div class="d-flex align-items-center d-lg-none ms-2" title="Show sidebar menu">
+                        <div class="btn btn-icon btn-color-white bg-white bg-opacity-0 bg-hover-opacity-10 w-35px h-35px"
+                            id="kt_app_sidebar_mobile_toggle">
+                            <i class="fa-solid fa-bars"><span class="path1"></span><span class="path2"></span></i>
+                        </div>
+                    </div>
+                    <!--end::Header mobile toggle-->
+                </div>
+                <!--end::Header container-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Wrapper-->
+            <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+
+
+
+
+
+
+                <!--begin::Sidebar-->
+                <div id="kt_app_sidebar" class="app-sidebar " data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
+                    data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+                    data-kt-drawer-width="auto" data-kt-drawer-direction="start"
+                    data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
+
+                    <!--begin::Sidebar primary-->
+                    <div class="app-sidebar-primary ">
+
+
+                        <!--begin::Logo-->
+                        <div class="app-sidebar-logo d-none d-lg-flex flex-center pt-8 pb-5" id="kt_app_sidebar_logo">
+                            <!--begin::Logo image-->
+                            <a href="#">
+                                <img alt="Logo"
+                                    src="{% static 'client/clients/assets/media/logos/default-small-dark.svg' %}"
+                                    class="h-35px" />
+                            </a>
+                            <!--end::Logo image-->
+                        </div>
+                        <!--end::Logo-->
+                        <!--begin::Primary menu-->
+
+                        <!--end::Primary menu-->
+                        <!--begin::Footer-->
+
+                        <!--end::Footer-->
+                    </div>
+                    <!--end::Sidebar primary-->
+
+                    <!--begin::Sidebar secondary-->
+                    <div class="app-sidebar-secondary ">
+
+
+                        <!--begin::Sidebar secondary menu-->
+                        <div class="menu menu-sub-indention menu-rounded menu-column menu-active-bg menu-title-gray-600 menu-icon-gray-500 menu-state-primary menu-arrow-gray-500 fw-semibold fs-6 py-4 py-lg-6"
+                            id="kt_app_sidebar_secondary_menu" data-kt-menu="true">
+
+                            <div id="kt_app_sidebar_secondary_menu_wrapper" class="hover-scroll-y mx-2 mx-lg-4"
+                                data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                                data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_app_sidebar_secondary_menu"
+                                data-kt-scroll-offset="20px">
+
+                                <!--begin:Menu item-->
+                                <div class="menu-item"><!--begin:Menu content-->
+                                    <div class="menu-content "><span
+                                            class="menu-section fs-5 fw-bolder ps-1 py-1">Dashboard</span></div>
+
+                                    <!--end:Menu content-->
+                                </div><!--end:Menu item--><!--begin:Menu item-->
+                                <div class="menu-item"><a class="menu-link"
+                                    href="/admin/homepage"><span class="menu-bullet"><span
+                                            class="bullet bullet-dot"></span></span><span class="menu-title">Home</span></a>
+                            </div>
+                                {% if user.is_superuser == 1 %}
+                                <div class="menu-item"><a class="menu-link"
+                                        href="{% url 'clientapp:hopital'%}"><span class="menu-bullet"><span
+                                                class="bullet bullet-dot"></span></span><span class="menu-title">Search
+                                            hopital</span></a>
+                                </div>
+
+                                <!--end:Menu item-->
+                                <div class="menu-item"><a class="menu-link"
+                                        href="{% url 'clientapp:pharmacie'%}"><span class="menu-bullet"><span
+                                                class="bullet bullet-dot"></span></span><span class="menu-title">Search
+                                            pharmacie</span></a>
+                                </div>
+                                {% else %}
+                                {% if user.acces == 1 %}
+                                <div class="menu-item"><a class="menu-link"
+                                    href="/hospital/service"><span class="menu-bullet"><span
+                                            class="bullet bullet-dot"></span></span><span class="menu-title">Nos services</span></a>
+                                </div>
+
+                                <!--end:Menu item-->
+                                <!-- <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="/hospital/profil"><span class="menu-bullet"><span
+                                                class="bullet bullet-dot"></span></span><span class="menu-title">Profil</span></a>
+                                </div> -->
+                                {% elif user.acces == 0 %}
+                                <div class="menu-item"><a class="menu-link"
+                                    href="/pharmacie/medicament"><span class="menu-bullet"><span
+                                            class="bullet bullet-dot"></span></span><span class="menu-title">Medicament</span></a>
+                                </div>
+
+                                <!--end:Menu item-->
+                                <!-- <div class="menu-item">
+                                    <a class="menu-link"
+                                        href="/hospital/profil"><span class="menu-bullet"><span
+                                                class="bullet bullet-dot"></span></span><span class="menu-title">Profil</span>
+                                            </a>
+                                </div> -->
+                                {% endif %}
+                                {% endif %}
+                                <div class="menu-item"><a class="menu-link"
+                                    href="{% url 'administrationapp:logout' %}"><span class="menu-bullet"><span
+                                            class="bullet bullet-dot"></span></span><span class="menu-title">Deconnexion</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Sidebar secondary menu-->
+                    </div>
+                    <!--end::Sidebar secondary-->
+
+                    <!--begin::Sidebar secondary toggle-->
+                    <button id="kt_app_sidebar_secondary_toggle"
+                        class="app-sidebar-secondary-toggle btn btn-sm btn-icon bg-body btn-color-gray-600 btn-active-color-primary position-absolute translate-middle z-index-1 start-100 end-0 bottom-0 shadow-sm d-none d-lg-flex mb-4"
+                        data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+                        data-kt-toggle-name="app-sidebar-secondary-collapse">
+
+                        <i class="ki-duotone ki-arrow-left fs-2 rotate-180"><span class="path1"></span><span
+                                class="path2"></span></i></button> <!--end::Sidebar secondary toggle-->
+
+                </div>
+                <!--end::Sidebar-->
+
+
+
+
+                <main class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                    {% block content %}{% endblock %}
+                </main>
+            </div>
+            <!--end::Wrapper-->
+
+
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::App-->
+
+    <script>
+        var hostUrl = "../../../assets/index.html";        </script>
+
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="{% static 'client/clients/assets/plugins/global/plugins.bundle.js' %}"></script>
+    <script src="{% static 'client/clients/assets/js/scripts.bundle.js' %}"></script>
+    <!--end::Global Javascript Bundle-->
+
+    <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="{% static 'client/clients/assets/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+    <!--end::Vendors Javascript-->
+
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{% static 'client/clients/assets/js/custom/apps/ecommerce/catalog/products.js' %}"></script>
+    <script src="{% static 'client/clients/assets/js/widgets.bundle.js' %}"></script>
+    <script src="{% static 'client/clients/assets/js/custom/apps/chat/chat.js' %}"></script>
+    <script src="{% static 'client/clients/assets/js/custom/utilities/modals/create-campaign.js' %}"></script>
+    <script src="{% static 'client/clients/assets/js/custom/utilities/modals/new-address.js' %}"></script>
+    <script src="{% static 'client/clients/assets/js/custom/utilities/modals/users-search.js' %}"></script>
+    <script src="https://kit.fontawesome.com/4bf5c1c0c6.js" crossorigin="anonymous"></script>
+    <!--end::Custom Javascript-->
+    <!--end::Javascript-->
+    {% block extra_js %}{% endblock %}
+</body>
+<!--end::Body-->
+
+<!-- Mirrored from preview.keenthemes.com/keen/demo5/apps/ecommerce/catalog/products.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Oct 2024 08:01:48 GMT -->
+
+</html>

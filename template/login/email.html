@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <style>
+    .button{
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+   </style>
+</head>
+<body>
+    <p>Bonjour {{user.username}}</p>
+    <p>Please click the button below to confirme your registration:</p>
+    <a href="http://127.0.0.1:8000/{% url 'app:suivant' {{user.username}} {{user.password}} %}"></a>
+</body>
+</html>

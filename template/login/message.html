@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestSearch</title>
+    <link rel="stylesheet" href="{% static 'login/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'login/cropper-1280x720.jpg' %}" alt="Doctor with Stethoscope">
+        </div>
+        <div class="form-container">
+            <div class="form" id="hospital-form">
+                <p>Merci de votre inscription</p>
+                <p>Veuillez consulter votre email pour continuer l'inscription</p>
+                <a href="{% url 'administrationapp:home' %}" class="btn btn-primary">Connexion</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'login/scripts.js' %}"></script>
+</body>
+</html>
