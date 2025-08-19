@@ -31,7 +31,7 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#kt_modal_new_address">
                             Nouveau medicament
-                        </button>
+                        </button> 
                     </div>
                     <div class="card-body pt-0">
                         <div class="table-responsive">
@@ -93,7 +93,7 @@
 <div class="modal fade" id="kt_modal_new_address" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
-            <form class="form" action="/pharmacie/createmedicament" id="kt_modal_new_address_form" enctype="multipart/form-data" method="post">
+            <form class="form" action="/pharmacie/createmedicament/{{pk}}" id="kt_modal_new_address_form" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div class="modal-header" id="kt_modal_new_address_header">
                     <h2>Nouveau medicament</h2>

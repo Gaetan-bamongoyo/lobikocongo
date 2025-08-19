@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BestSearch</title>
+    <title>LobikoCongo</title>
     <link rel="stylesheet" href="{% static 'login/styles.css' %}">
 </head>
 <body>
@@ -16,7 +16,7 @@
             <form action="{% url 'administrationapp:login' %}" method="post">
                 {% csrf_token %}
                 <div class="form" id="login-form">
-                    <h2>Bienvenu dans BestSearch</h2>
+                    <h2>Bienvenu dans LobikoCongo</h2>
                     <input type="text" placeholder="Utilisateur" name="username" required>
                     <input type="password" name="password" placeholder="Mot de passe" required>
                     {% if message_erreur %}
@@ -29,16 +29,16 @@
             <form action="{% url 'administrationapp:create' %}" method="post">
                 {% csrf_token %}
                 <div class="form" id="signup-form" style="display: none;">
-                    <h2>Bienvenu dans BestSearch</h2>
+                    <h2>Bienvenu dans LobikoCongo</h2>
                     <input type="text" name="username" placeholder="Utilisateur" required>
                     <input type="email" placeholder="Email" name="email" required>
                     <input type="password" placeholder="Mot de passe" name="password" required>
                     <input type="password" name="confirme" placeholder="Confirm mot de passe" required>
-                    <select name="compte" id="" aria-placeholder="Compte">
+                    <!-- <select name="compte" id="" aria-placeholder="Compte">
                         <option>Quel compte creer....</option>
                         <option value="1">hopital</option>
                         <option value="0">Pharmacie</option> 
-                    </select>
+                    </select> -->
     
                     <button type="submit">Enregistrez-vous</button>
                     <p>Vous avez un compte? <a href="#" onclick="showForm('login-form')">Connectez-vous</a></p>

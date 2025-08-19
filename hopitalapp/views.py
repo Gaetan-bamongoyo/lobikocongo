@@ -57,16 +57,17 @@ def modifierHopital(request, pk):
                 return redirect('/hospital/profil')
 
 @login_required
-def servicepage(request):
+def servicepage(request, pk):
     if request.user.is_authenticated:
-        user_id = request.user.id
+        id_pk = decrypt_id(pk)
         service = Service.objects.all()
-        choix = ChoixService.objects.select_related('user', 'hopital', 'service').filter(user=user_id)
+        choix = ChoixService.objects.select_related('user', 'hopital', 'service').filter(hopital__id=id_pk)
         for i in choix:
             i.encrypt_id = encrypt_id(i.id)
         context = {
             'service':service,
-            'choix':choix
+            'choix':choix,
+            'pk':pk
         }
         return render(request, 'admin/service.html', context)
 
@@ -90,7 +91,7 @@ def maladiepage(request, pk):
         return render(request, 'admin/detailelement.html', context)
 
 @login_required
-def createservicechoix(request):
+def createservicechoix(request, pk):
     if request.user.is_authenticated:
         id = request.user.id
         user_id = CustomUser.objects.get(id=id)
@@ -101,17 +102,19 @@ def createservicechoix(request):
             service = int(request.POST.get('service'))
             service_id = Service.objects.get(id=service)
             service_id.id
-            # check = ChoixService.objects.get(user=user_id, hopital=hopital, service=service_id)
-            # if check:
-            form = ChoixService(
-                hopital=hopital,
-                user=user_id,
-                service=service_id
-            )
-            form.save()
-            return redirect('/hospital/service')
-            # else:
-            #     return redirect('/hospital/service')
+            check = ChoixService.objects.filter(hopital=hopital, service=service_id)
+            if not check:
+                form = ChoixService(
+                    hopital=hopital,
+                    user=user_id,
+                    service=service_id
+                )
+                form.save()
+                url = f"/hospital/service/{pk}"
+                return redirect(url)
+            else:
+                url = f"/hospital/service/{pk}"
+                return redirect(url)
 
 @login_required
 def createmaladie(request, pk):         
@@ -136,7 +139,6 @@ def createmaladie(request, pk):
             form.save()
             url = f"/hospital/detail/{crypt}"
             return redirect(url)
-            return render(request, 'admin/detailelement.html')
 
 @login_required
 def createequipement(request, pk):         
@@ -195,4 +197,10 @@ def createmedecin(request, pk):
             form.save()
             url = f"/hospital/detail/{crypt}"
             return redirect(url)
-            return render(request, 'admin/detailelement.html')
+    
+def hopitalCreation(request):
+    hopital = Hopital.objects.all()
+    for i in hopital:
+            i.encrypt_id = encrypt_id(i.id)
+    ville = Ville.objects.all()
+    return render(request, 'admin/hopital.html', {'hopital':hopital,'ville':ville})

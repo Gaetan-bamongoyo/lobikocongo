@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>{% block title %}Administration{% endblock %}</title>
+    <title>LobikoCongo</title>
     <meta charset="utf-8" />
     <meta name="description"
         content="The most advanced Bootstrap Admin Theme on Bootstrap Market trusted by over 4,000 beginners and professionals. Multi-demo, Dark Mode, RTL support. Grab your copy now and get life-time updates for free." />
@@ -205,31 +205,15 @@
                                             pharmacie</span></a>
                                 </div>
                                 {% else %}
-                                {% if user.acces == 1 %}
+                                {% if user.acces == 2 %}
                                 <div class="menu-item"><a class="menu-link"
-                                    href="/hospital/service"><span class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Nos services</span></a>
+                                    href="/hospital/hopital"><span class="menu-bullet"><span
+                                            class="bullet bullet-dot"></span></span><span class="menu-title">Les hopitaux</span></a>
                                 </div>
-
-                                <!--end:Menu item-->
-                                <!-- <div class="menu-item">
-                                    <a class="menu-link"
-                                        href="/hospital/profil"><span class="menu-bullet"><span
-                                                class="bullet bullet-dot"></span></span><span class="menu-title">Profil</span></a>
-                                </div> -->
-                                {% elif user.acces == 0 %}
                                 <div class="menu-item"><a class="menu-link"
-                                    href="/pharmacie/medicament"><span class="menu-bullet"><span
-                                            class="bullet bullet-dot"></span></span><span class="menu-title">Medicament</span></a>
+                                    href="/pharmacie/pharmacie"><span class="menu-bullet"><span
+                                            class="bullet bullet-dot"></span></span><span class="menu-title">Les phamarcies</span></a>
                                 </div>
-
-                                <!--end:Menu item-->
-                                <!-- <div class="menu-item">
-                                    <a class="menu-link"
-                                        href="/hospital/profil"><span class="menu-bullet"><span
-                                                class="bullet bullet-dot"></span></span><span class="menu-title">Profil</span>
-                                            </a>
-                                </div> -->
                                 {% endif %}
                                 {% endif %}
                                 <div class="menu-item"><a class="menu-link"

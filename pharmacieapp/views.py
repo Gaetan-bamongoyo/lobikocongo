@@ -25,16 +25,16 @@ def createcategorie(request):
         return redirect('/pharmacie/categorie')
 
 @login_required
-def medicamentPage(request):
+def medicamentPage(request, pk):
+    decrypt = decrypt_id(pk)
     if request.user.is_authenticated:
-        id = request.user.id
-        medicamentchoisie = MedicamentChoise.objects.select_related('medicament').filter(user=id)
+        medicamentchoisie = MedicamentChoise.objects.select_related('medicament').filter(pharmacie=decrypt)
         medicament = Medicament.objects.all()
-        return render(request, 'admin/medicament.html', {'medicament':medicament, 'medicamentchoisie':medicamentchoisie})
+        return render(request, 'admin/medicament.html', {'medicament':medicament, 'medicamentchoisie':medicamentchoisie, 'pk':pk})
 
 
 @login_required
-def createmedicament(request):
+def createmedicament(request, pk):
     if request.user.is_authenticated:
         id = request.user.id
         user_id = CustomUser.objects.get(id=id)
@@ -47,7 +47,7 @@ def createmedicament(request):
             prix = request.POST.get('prix')
             image = request.FILES.get('image')
             medi = request.POST.get('medicament')
-            retr = f'/pharmacie/medicament'
+            retr = f'/pharmacie/medicament/{pk}'
             if medi.strip() == "":
                 if Medicament.objects.filter(designation = designation).exists():
                     return redirect(retr)
@@ -71,7 +71,7 @@ def createmedicament(request):
                     return redirect(retr)
             else:
                 medicament = int(medi)
-                medicament_id = medi.objects.get(id=medicament)
+                medicament_id = Medicament.objects.get(id=medicament)
                 medicament_id.id
                 form = MedicamentChoise(
                     pharmacie=pharmacie,
@@ -82,5 +82,12 @@ def createmedicament(request):
                 form.save()
                 return redirect(retr)
         else:
-            return redirect('/pharmacie/medicament')
-    return redirect('/admin')
+            return redirect(retr)
+    return redirect(retr)
+
+def pharmaciePage(request):
+    pharmacie = Pharmacie.objects.all()
+    for i in pharmacie:
+        i.encrypt_id = encrypt_id(i.id)
+    ville = Ville.objects.all()
+    return render(request, 'admin/pharmacie.html', {'pharmacie':pharmacie,'ville':ville})

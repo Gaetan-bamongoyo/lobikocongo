@@ -36,7 +36,7 @@ def createuser(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_pass = request.POST.get('confirme')
-        compte = request.POST.get('compte') 
+        # compte = request.POST.get('compte') 
         if password==confirm_pass:
             if CustomUser.objects.filter(email=email).exists():
                 message_erreur = 'Desole le compte existe deja'
@@ -47,7 +47,7 @@ def createuser(request):
                         password=password,
                         email=email,
                         is_superuser = 0,
-                        acces = compte,
+                        acces = 2,
                         first_name=username 
                     )
                 form.set_password(password)
@@ -55,87 +55,79 @@ def createuser(request):
                 user_id = form.id
                 retrieved = CustomUser.objects.get(id=user_id)
                 id = encrypt_id(retrieved.id)
-                # message = render_to_string('login/email.html', {'user':retrieved})
-                if compte == '1':
-                    # send_mail(
-                    #     'Bienvenu dans bestsearch',
-                    #     message,
-                    #     settings.DEFAULT_FROM_EMAIL,
-                    #     [email]
-                    # )
-                    return render(request, 'login/hopital.html', {'user':id, 'ville':ville})
-                else:
-                    # send_mail(
-                    #     'Bienvenu dans bestsearch',
-                    #     'Merci de votre enregistrement,\n\n vous avez choisi la creation de compte pour votre hopital, veuillez clic sur ce lien ${http://127.0.0.1:8000/} pour completer les renseignements de votre hopital\n\n Cordialement!!!',
-                    #     settings.DEFAULT_FROM_EMAIL,
-                    #     [email]
-                    # )
-                    return render(request, 'login/pharmacie.html', {'user':id,  'ville':ville})
-                # return render(request, 'login/message.html')
+                return redirect('administrationapp:home')
         else:
             return redirect('student:login')
 
 
 def createhospital(request):
-    if request.method == 'POST':
-        pk = request.POST.get('id')
-        designation = request.POST.get('designation')
-        # getting province id
-        ville = int(request.POST.get('ville'))
-        ville_id = Ville.objects.get(id=ville)
-        ville_id.id
-        # end code
-        adresse = request.POST.get('adresse')
-        phone = request.POST.get('numero')
-        numero = request.POST.get('enregistrement')
-        consultation = request.POST.get('consultation')
-        image = request.FILES.get('image')
-        # decrypt id user
-        id_pk = decrypt_id(pk)
-        user_id = CustomUser.objects.get(id=id_pk)
-        user_id.id
-        # end code
-        form = Hopital(
-            designation = designation,
-            ville = ville_id,
-            adresse = adresse,
-            numeroenregistrement = numero,
-            phone = phone, 
-            photo = image,
-            is_active = True,
-            consultation = consultation,
-            user=user_id
-        )
-        form.save()
-        return render(request, 'login/message.html')
+    if request.user.is_authenticated:
+        id = request.user.id
+        if request.method == 'POST':
+            designation = request.POST.get('designation')
+            # getting province id
+            ville = int(request.POST.get('ville'))
+            ville_id = Ville.objects.get(id=ville)
+            ville_id.id
+            # end code
+            adresse = request.POST.get('adresse')
+            phone = request.POST.get('numero')
+            numero = request.POST.get('enregistrement')
+            consultation = request.POST.get('consultation')
+            image = request.FILES.get('image')
+            # decrypt id user
+            user_id = CustomUser.objects.get(id=id)
+            user_id.id
+            # end code
+            check = Hopital.objects.filter(numeroenregistrement = numero)
+            if not check:
+                form = Hopital(
+                    designation = designation,
+                    ville = ville_id,
+                    adresse = adresse,
+                    numeroenregistrement = numero,
+                    phone = phone, 
+                    photo = image,
+                    is_active = True,
+                    consultation = consultation,
+                    user=user_id
+                )
+                form.save()
+                return redirect('hopitalapp:hopital')
+            else:
+                return redirect('hopitalapp:hopital')
 
 
 def createpharmacie(request):
-    if request.method == 'POST':
-        pk = request.POST.get('id')
-        designation = request.POST.get('designation')
-        ville = int(request.POST.get('ville'))
-        ville_id = Ville.objects.get(id=ville)
-        ville_id.id
-        phone = request.POST.get('phone')
-        numeroenregistrement = request.POST.get('numeroenregistrement')
-        adresse = request.POST.get('adresse')
-        image = request.FILES.get('image')
-        id_pk = decrypt_id(pk)
-        user_id = CustomUser.objects.get(id=id_pk)
-        user_id.id
-        form = Pharmacie(
-            designation=designation,
-            numero_enregistrement=numeroenregistrement,
-            ville=ville_id, 
-            phone=phone,
-            photo=image,
-            adresse = adresse,
-            user=user_id
-        )
-        form.save()
-        return render(request, 'login/index.html')
+    if request.user.is_authenticated:
+        id = request.user.id
+        if request.method == 'POST':
+            pk = request.POST.get('id')
+            designation = request.POST.get('designation')
+            ville = int(request.POST.get('ville'))
+            ville_id = Ville.objects.get(id=ville)
+            ville_id.id
+            phone = request.POST.get('phone')
+            numeroenregistrement = request.POST.get('numeroenregistrement')
+            adresse = request.POST.get('adresse')
+            image = request.FILES.get('image')
+            user_id = CustomUser.objects.get(id=id)
+            user_id.id
+            check = Pharmacie.objects.filter(numero_enregistrement = numeroenregistrement)
+            if not check:
+                form = Pharmacie(
+                    designation=designation,
+                    numero_enregistrement=numeroenregistrement,
+                    ville=ville_id, 
+                    phone=phone,
+                    photo=image,
+                    adresse = adresse,
+                    user=user_id
+                )
+                form.save()
+                return redirect('pharmacieapp:pharmacie')
+            else:
+                return redirect('pharmacieapp:pharmacie')
 
 def loginUser(request):
     if request.method=='POST':

@@ -10,11 +10,11 @@
             <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack flex-wrap">
                 <div class="page-title d-flex py-2 py-lg-0 flex-column justify-content-center me-3">
                     <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                        Affectation des services
+                        Liste des Pharmacies
                     </h1>
                 </div>
             </div>
-        </div>  
+        </div>
         <!-- Content -->
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container container-xxl">
@@ -23,14 +23,14 @@
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
                                 <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text"
-                                    data-kt-ecommerce-product-filter="search"
+                                <input type="text" data-kt-ecommerce-product-filter="search"
                                     class="form-control form-control-solid w-250px ps-12"
                                     placeholder="Search Product" />
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_address">
-                            Nouveau service
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#kt_modal_new_address">
+                            Nouvelle pharmacie
                         </button>
                     </div>
                     <div class="card-body pt-0">
@@ -39,40 +39,45 @@
                                 <thead>
                                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                <input class="form-check-input" type="checkbox" value="1" aria-label="Select all" />
+                                            <div
+                                                class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    aria-label="Select all" />
                                             </div>
                                         </th>
-                                        <th class="min-w-200px">Services</th>
-                                        <th class="text-end min-w-100px">Description</th>
+                                        <th class="min-w-200px">Pharmacies</th>
+                                        <th class="text-end min-w-100px">Adresse</th>
+                                        <th class="text-end min-w-100px">Ajouter par</th>
                                         <th class="text-end min-w-70px">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
-                                    {% for i in choix %}
+                                    {% for i in pharmacie %}
                                     <tr>
                                         <td>
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" value="1" aria-label="Select row" />
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    aria-label="Select row" />
                                             </div>
                                         </td>
-                                        <td>{{ i.service.designation }}</td>
-                                        <td class="text-end">{{ i.service.description }}</td>
+                                        <td>{{ i.designation }}</td>
+                                        <td class="text-end">{{ i.adresse }}</td>
+                                        <td class="text-end">{{ i.user.username }}</td>
                                         <td class="text-end">
                                             <div class="d-flex">
-                                                <a href="/hospital/detail/{{ i.encrypt_id }}" class="btn btn-success shadow btn-xs sharp me-1" title="Voir">
+                                                <a href="/pharmacie/medicament/{{ i.encrypt_id }}"
+                                                    class="btn btn-success shadow btn-xs sharp me-1" title="Voir">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="#" 
-                                                   class="btn btn-primary shadow btn-xs sharp me-1 edit-service-btn"
-                                                   data-bs-toggle="modal"
-                                                   data-bs-target="#editServiceModal"
-                                                   data-id="{{ i.service.id }}"
-                                                   data-designation="{{ i.service.designation }}"
-                                                   title="Modifier">
+                                                <a href="#"
+                                                    class="btn btn-primary shadow btn-xs sharp me-1 edit-service-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#editServiceModal"
+                                                    data-id="{{ i.service.id }}"
+                                                    data-designation="{{ i.service.designation }}" title="Modifier">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp" title="Supprimer">
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"
+                                                    title="Supprimer">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </div>
@@ -92,10 +97,11 @@
 <div class="modal fade" id="kt_modal_new_address" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
-            <form class="form" action="/hospital/createservice/{{pk}}" id="kt_modal_new_address_form" enctype="multipart/form-data" method="post">
+            <form class="form" action="/admin/createpharmacie" id="kt_modal_new_address_form"
+                enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div class="modal-header" id="kt_modal_new_address_header">
-                    <h2>Affectation service</h2>
+                    <h2>Nouveau hopital</h2>
                 </div>
                 <div class="modal-body py-10 px-lg-17">
                     <!--begin::Scroll-->
@@ -103,23 +109,52 @@
                         data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                         data-kt-scroll-dependencies="#kt_modal_new_address_header"
                         data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
+                        <div class="row mb-5">
+                            <div class="col-md-6 fv-row">
+                                <label class="required fs-5 fw-semibold mb-2">Nom hopital</label>
+                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                    name="designation" />
+                            </div>
+                            <div class="col-md-6 fv-row">
+                                <label class="required fs-5 fw-semibold mb-2">Numero enregistrement</label>
+
+                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                    name="numeroenregistrement" />
+                            </div>
+                        </div>
                         <div class="select-div"  id="selectDIv">
                             <div class="d-flex flex-column mb-5 fv-row">
                                 <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                                    <span class="required">Services</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Selectionner un service">
+                                    <span class="required">Ville</span>
+                                    <span class="ms-1" data-bs-toggle="tooltip" title="Selectionner un medicament">
                                         </span> </label>
-                                <select name="service" data-control="select2"
+                                <select name="ville" data-control="select2"
                                     data-dropdown-parent="#kt_modal_new_address"
                                     data-placeholder="Selectionner un medicament..." class="form-select form-select-solid">
-                                    <option value="">Selectionner un service...</option>
-                                    {% for i in service %}
+                                    <option value="">Selectionner une ville...</option>
+                                    {% for i in ville %}
                                     <option value="{{i.id}}">{{i.designation}}</option>
                                     {% endfor %}
                                 </select>
                                 <!--end::Select-->
                             </div>
                         </div>
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="required fs-5 fw-semibold mb-2">Adresse</label>
+
+                            <input class="form-control form-control-solid" placeholder="" name="adresse" type="text" />
+                        </div>
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="required fs-5 fw-semibold mb-2">Telephone</label>
+
+                            <input class="form-control form-control-solid" placeholder="" name="phone" type="number" />
+                        </div>
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="required fs-5 fw-semibold mb-2">Image</label>
+
+                            <input type="file" class="form-control form-control-solid" placeholder="" name="image" />
+                        </div>
+                        
                     </div>
                     <!--end::Scroll-->
                 </div>
@@ -145,55 +180,25 @@
 </div>
 
 
-<!-- Modal de modification de service (même design que l'enregistrement) -->
-<form method="post" action="/hospital/updateservice/">
-    {% csrf_token %}
-<div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editServiceModalLabel">Modification de service</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="service_id" id="edit-service-id">
-          <div class="form-group">
-            <label for="edit-service-select">Choisir le service</label>
-            <select name="service" id="edit-service-select" class="form-control default-select">
-              {% for s in service %}
-              <option value="{{ s.id }}">{{ s.designation }}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" class="btn btn-primary">Modifier</button>
-        </div>
-      </div>
-  </div>
-</div>
-</form>
-
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // ... (autres initialisations)
-    document.querySelectorAll('.edit-service-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            // Pré-remplir le select avec la bonne valeur
-            document.getElementById('edit-service-id').value = this.getAttribute('data-id');
-            var select = document.getElementById('edit-service-select');
-            var id = this.getAttribute('data-id');
-            for (var i = 0; i < select.options.length; i++) {
-                if (select.options[i].value === id) {
-                    select.selectedIndex = i;
-                    break;
+    document.addEventListener('DOMContentLoaded', function () {
+        // ... (autres initialisations)
+        document.querySelectorAll('.edit-service-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                // Pré-remplir le select avec la bonne valeur
+                document.getElementById('edit-service-id').value = this.getAttribute('data-id');
+                var select = document.getElementById('edit-service-select');
+                var id = this.getAttribute('data-id');
+                for (var i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === id) {
+                        select.selectedIndex = i;
+                        break;
+                    }
                 }
-            }
-            // Pré-remplir la description
-            document.getElementById('edit-service-description').value = this.getAttribute('data-description');
+                // Pré-remplir la description
+                document.getElementById('edit-service-description').value = this.getAttribute('data-description');
+            });
         });
     });
-});
 </script>
 {% endblock %}
